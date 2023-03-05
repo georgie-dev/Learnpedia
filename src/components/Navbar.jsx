@@ -26,13 +26,6 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <div className="flex justify-between items-center gap-10 font-semibold">
-            <p to="/">Become a creator</p>
-            <p to="/">Login</p>
-            <p to="/" className="px-6 py-1.5 rounded-xl border-2">
-              Sign up
-            </p>
-          </div>
         </div>
       </>
       <Outlet />
