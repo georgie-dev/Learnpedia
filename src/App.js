@@ -1,10 +1,8 @@
 import './App.css';
-
+ import { Navbar } from './components';
 function App() {
   return (
-    <div className="App flex justify-center">
-      <p className=' text-6xl font-mono'>Hello Snr Dev RichGod</p>
-    </div>
+    <Navbar/>
   );
 }
 
