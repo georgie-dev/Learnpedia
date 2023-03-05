@@ -1,12 +1,16 @@
 import "./App.css";
-import { Login, Signup } from "./modules/learner/pages";
-
+import { Navbar } from "./components";
+import { Home } from "./modules/learner/pages";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   return (
-    <div className="App flex flex-1 justify-center">
-      <Signup />
-      {/* <Login /> */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
