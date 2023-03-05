@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import { Link, Outlet } from 'react-router-dom';
+import Logo from '../assets/img/Logo.png'
 const Navbar = () => {
     const [search, setSearch] = useState("");
   return (
     <>
     <div className='p-6 shadow-sm border-b'>
         <div className='flex justify-around items-center'>
-            <img src='#' alt='logo'/>
+            <img src={Logo} width='12%' alt='logo'/>
             <div>
                 <input
                 type='search'
