@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../../firebase";
+import { db, signUpWithGoogle } from "../../../firebase";
 import { useAuth } from "../../../context/AuthContext";
 import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
 
@@ -39,6 +39,8 @@ const Signup = () => {
     }
 
     try {
+      setLoading(true);
+
       await signUp(signupFormData.email, signupFormData.password);
 
       const newLearnerData = {
@@ -56,9 +58,12 @@ const Signup = () => {
         isOnline: true,
       });
 
+      setLoading(false);
+
       console.log("Signed up in successfully");
       navigate("/sidebar");
     } catch (error) {
+      setLoading(false);
       console.error("Error adding learner data: ", error);
     }
     setSignupFormData({
@@ -67,6 +72,26 @@ const Signup = () => {
       password: "",
       loading: false,
     });
+  };
+
+  const handleGoogleSignup = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await signUpWithGoogle();
+
+      await setDoc(doc(userType, getUserUid()), {
+        type: "learner",
+      });
+      await setDoc(doc(userState, getUserUid()), {
+        isOnline: true,
+      });
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -118,8 +143,12 @@ const Signup = () => {
           </button>
         </form>
         <p className="font-medium my-3">Or</p>
-        <button className="py-2 w-full font-bold border border-black rounded-md">
-          Sign up with Google
+        <button
+          className="py-2 w-full font-bold border border-black rounded-md"
+          disabled={loading}
+          onClick={handleGoogleSignup}
+        >
+          {loading ? <p>Loading...</p> : <p>Sign up with Google</p>}
         </button>
       </div>
     </div>
