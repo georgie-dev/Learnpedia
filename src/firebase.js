@@ -1,7 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  collection,
+  doc,
+  getFirestore,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,7 +37,43 @@ const storage = getStorage(app);
 // get authentication
 const auth = getAuth(app);
 
-// get provider
-const provider = new GoogleAuthProvider();
+// collection references
+const learnersRef = collection(db, "learners_data");
 
-export { auth, db, storage, provider };
+// sign up with google
+export async function signUpWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    const newLearnerData = {
+      uid: auth.currentUser.uid,
+      name: user.displayName,
+      email: user.email,
+      image: user.photoURL,
+      createdAt: serverTimestamp(),
+    };
+
+    await setDoc(doc(learnersRef, auth.currentUser.uid), newLearnerData);
+
+    console.log("Sign up with Google successfull: ", newLearnerData);
+  } catch (error) {
+    console.error("Error signing up with Google: ", error);
+  }
+}
+
+// sign in with google
+export async function signInWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    console.log("Sign in with Google successfull: ", user);
+  } catch (error) {
+    console.error("Error signing in with Google: ", error);
+  }
+}
+
+export { auth, db, storage };
