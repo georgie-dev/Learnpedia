@@ -2,7 +2,7 @@ import { collection, doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import { db } from "../../../firebase";
+import { db, signInWithGoogle } from "../../../firebase";
 
 const Login = () => {
   const { login, getUserUid } = useAuth();
@@ -49,12 +49,26 @@ const Login = () => {
     });
   };
 
+  const handleGoogleSignin = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await signInWithGoogle();
+      await updateDoc(doc(userState, getUserUid()), {
+        isOnline: true,
+      });
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center ">
       <div className=" flex flex-col items-center">
-        <p className="text-4xl font-semibold my-4">
-          Begin your learning journey today!
-        </p>
+        <p className="text-4xl font-semibold my-4">Get back to learning!</p>
         <form className="w-full flex flex-col" onSubmit={handleSubmit}>
           <div className="space-y-3 mb-10">
             <label className="flex flex-col font-medium text-lg">
@@ -88,8 +102,12 @@ const Login = () => {
           </button>
         </form>
         <p className="font-medium my-3">Or</p>
-        <button className="py-2 w-full font-bold border border-black rounded-md">
-          Login with Google
+        <button
+          className="py-2 w-full font-bold border border-black rounded-md"
+          disabled={loading}
+          onClick={handleGoogleSignin}
+        >
+          {loading ? <p>Loading...</p> : <p>Login with Google</p>}
         </button>
       </div>
     </div>
