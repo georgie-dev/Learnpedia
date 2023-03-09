@@ -22,6 +22,7 @@ const Login = () => {
     setLoginFormData({ ...loginFormData, [e.target.name]: e.target.value });
   };
 
+  // login with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoginFormData({ ...loginFormData, loading: true });
@@ -37,7 +38,7 @@ const Login = () => {
       });
 
       console.log("Logged in successfully");
-      navigate("/sidebar");
+      navigate("/learner");
     } catch (error) {
       navigate("/");
       console.error("Error adding learner data: ", error);
@@ -49,6 +50,7 @@ const Login = () => {
     });
   };
 
+  // login with google
   const handleGoogleSignin = async (e) => {
     e.preventDefault();
     try {
@@ -59,6 +61,8 @@ const Login = () => {
       });
 
       setLoading(false);
+      console.log("Logged in successfully");
+      navigate("/learner");
     } catch (error) {
       setLoading(false);
       console.log(error);
