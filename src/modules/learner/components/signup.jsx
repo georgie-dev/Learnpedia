@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { db, signUpWithGoogle } from "../../../firebase";
 import { useAuth } from "../../../context/AuthContext";
 import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { updateProfile } from "firebase/auth";
 
 const Signup = () => {
-  const { signUp, getUserUid } = useAuth();
+  const { signUp, getUserUid, currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,14 @@ const Signup = () => {
     setSignupFormData({ ...signupFormData, [e.target.name]: e.target.value });
   };
 
+  // update user display name when user signs up with email and password
+  const getAndSetNames = () => {
+    updateProfile(currentUser, {
+      displayName: signupFormData.name,
+    });
+  };
+
+  // sign up with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSignupFormData({ ...signupFormData, loading: true });
@@ -42,6 +51,8 @@ const Signup = () => {
       setLoading(true);
 
       await signUp(signupFormData.email, signupFormData.password);
+
+      getAndSetNames();
 
       const newLearnerData = {
         uid: getUserUid(),
@@ -61,7 +72,7 @@ const Signup = () => {
       setLoading(false);
 
       console.log("Signed up in successfully");
-      navigate("/sidebar");
+      navigate("/learner");
     } catch (error) {
       setLoading(false);
       console.error("Error adding learner data: ", error);
@@ -74,6 +85,7 @@ const Signup = () => {
     });
   };
 
+  // sign up with google
   const handleGoogleSignup = async (e) => {
     e.preventDefault();
     try {
@@ -88,6 +100,8 @@ const Signup = () => {
       });
 
       setLoading(false);
+      console.log("Signed up in successfully");
+      navigate("/learner");
     } catch (error) {
       setLoading(false);
       console.log(error);
