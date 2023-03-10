@@ -21,7 +21,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center gap-10 font-semibold">
               <Link to="/">Become a creator</Link>
               <Link to="/">Login</Link>
-              <Link to="/" className="px-6 py-1.5 rounded-xl border-2">
+              <Link to="Signup" className="px-6 py-1.5 rounded-xl border-2">
                 Sign up
               </Link>
             </div>
