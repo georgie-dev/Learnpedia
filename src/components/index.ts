@@ -1,0 +1,6 @@
+export {default as Header} from './Header'
+export {default as Banner} from './Banner'
+export {default as Recommendations} from './Recommendations'
+export {default as Category} from './Category'
+export {default as Creators} from './Creators'
+export {default as Footer} from './Footer'
