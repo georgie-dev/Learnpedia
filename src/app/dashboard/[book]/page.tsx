@@ -21,7 +21,7 @@ const Page = ({ params }: { params: { book: string } }) => {
                     <Link href={`/dashboard/${book?.id}`} className=' w-12 h-12 rounded-full'>
                         <Image
                             alt='user'
-                            src={book?.avatar}
+                            src={book?.avatar || '/avatars/avatar1.svg'}
                             width={48}
                             height={48}
                         />
@@ -39,7 +39,7 @@ const Page = ({ params }: { params: { book: string } }) => {
                     <div className=' rounded-md w-full my-5 h-[24rem] bg-red-200 relative'>
                         <Image
                             alt='book'
-                            src={book?.image}
+                            src={book?.image || '/books/book1.svg'}
                             fill 
                             quality={100}
                             objectFit='cover'
