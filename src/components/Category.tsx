@@ -14,7 +14,7 @@ interface Button {
 const Button = (items : Button)=>{
     return(
         <div className=' flex gap-5 items-center'>
-            <div className=' w-32 h-28 border rounded-xl border-[#717070]/70 text-black flex items-center justify-center font-bold text-2xl'>
+            <div className=' w-24 h-24 border rounded-xl border-[#717070]/70 text-black flex items-center justify-center font-bold text-2xl'>
                 {items.icon}
             </div>
             <div className=' flex flex-col gap-1'>

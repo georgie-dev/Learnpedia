@@ -16,7 +16,8 @@ const config: Config = {
       colors:{
         'blue': '#2F80ED',
         'button-blue' : '#0968B1',
-        'grey' : '#D9D9D9'
+        'grey' : '#D9D9D9',
+        'light-blue': '#EDF6F9',
       }
     },
   },

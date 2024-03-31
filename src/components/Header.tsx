@@ -35,8 +35,8 @@ const Sidebar = ({ isOpen, toggleSidebar }: { isOpen: boolean; toggleSidebar: ()
                 <div className='flex flex-col text-sm font-semibold text-white gap-6'>
 
                     <Link href='#' className='  px-5 py-2 bg-button-blue hover:bg-blue rounded-lg'>Become a creator</Link>
-                    <Link href='#' className=' px-5 py-2 bg-button-blue hover:bg-blue rounded-lg'> Login</Link>
-                    <Link href='#' className=' bg-button-blue hover:bg-blue rounded-lg px-5 py-2'> Sign up</Link>
+                    <Link href='/login' className=' px-5 py-2 bg-button-blue hover:bg-blue rounded-lg'> Login</Link>
+                    <Link href='/signup' className=' bg-button-blue hover:bg-blue rounded-lg px-5 py-2'> Sign up</Link>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@ const Header = () => {
                 <div className='hidden md:flex items-center text-sm font-semibold text-black gap-6'>
 
                     <Link href='#' className=' hover:underline hover:underline-offset-4 flex items-end gap-0 group'> <span>Become a creator</span> <span className='invisible group-hover:visible'><HiExternalLink size={15} /></span> </Link>
-                    <Link href='#' className='hover:underline hover:underline-offset-4'> Login</Link>
-                    <Link href='#' className=' border border-[#717070] hover:bg-[#717070]/20 rounded-lg px-5 py-2'> Sign up</Link>
+                    <Link href='/login' className='hover:underline hover:underline-offset-4'> Login</Link>
+                    <Link href='/signup' className=' border border-[#717070] hover:bg-[#717070]/20 rounded-lg px-5 py-2'> Sign up</Link>
                 </div>
                 <div className=' block md:hidden text-button-blue font-bold'>
                     {isSidebarOpen ?
