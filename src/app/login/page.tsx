@@ -41,7 +41,8 @@ const Login = () => {
                                 }
                             </div>
                         </div>
-                        <button type='submit' className=' py-2 px-5 w-fit bg-button-blue text-sm hover:bg-blue rounded-lg text-white'> Login</button>
+                        {/* <button type='submit' className=' py-2 px-5 w-fit bg-button-blue text-sm hover:bg-blue rounded-lg text-white'> Login</button> */}
+                        <Link href='/dashboard' className=' py-2 px-5 w-fit bg-button-blue text-sm hover:bg-blue rounded-lg text-white'> Login</Link>
 
                         <div className=' flex flex-col gap-2 text-black items-center font-medium'>
                             <Link href='#' className= 'text-sm hover:underline hover:underline-offset-4'>Forgot password?</Link>
